@@ -18,6 +18,8 @@
 import { words } from "@/data.ts";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
 
+const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
+
 const count = ref(0)
 const inputs_container_ref: Ref<HTMLDivElement | null> = ref(null)
 const current_word = computed(() => {
@@ -26,7 +28,8 @@ const current_word = computed(() => {
 const ready_dialog_ref: Ref<HTMLDialogElement | null> = ref(null)
 
 const playAudio = () => {
-    new Audio(current_word.value.voiceUrl).play()
+    const voiceUrl = current_word.value.voiceUrl ? current_word.value.voiceUrl : `${voice_basic_url}${current_word.value.content}`
+    new Audio(voiceUrl).play()
 }
 
 const handleTyping = (event: Event, index: number) => {
