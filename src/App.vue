@@ -1,7 +1,14 @@
 <template>
     <div class="app">
         <header>
-            <div class="short_cut"></div>
+            <div class="short_cut">
+                <section>
+                    ⌘/Ctrl + Z = 🔊
+                </section>
+                <section>
+                    ⌘/Ctrl + X = 👀
+                </section>
+            </div>
             <div class="translation">
                 {{ current_word.translation }}
             </div>
@@ -95,6 +102,11 @@ const able_input = (index: number) => {
     inputs_container_ref.value?.children[index].setAttribute("disabled", "false")
 }
 
+const show_answer = () => {
+    for (let i = 0; i < current_word.value.content.length; i++) {
+        inputs_container_ref.value?.children[i].setAttribute("placeholder", current_word.value.content[i])
+    }
+}
 
 const close_dialog = () => {
     ready_dialog_ref.value?.close()
@@ -113,8 +125,10 @@ const bindKeys = () => {
             return
         } else if ((event.metaKey || event.ctrlKey) && event.key === 'x') {
             event.preventDefault();
-            playAudio()
+            show_answer()
+            return
         }
+
         // single key
         switch (event.key) {
             case "Enter":
@@ -150,7 +164,6 @@ onMounted(() => {
 }
 
 /* header */
-
 header {
     position: relative;
 }
@@ -160,11 +173,15 @@ header .translation {
 }
 
 header .short_cut {
-    background-color: lightblue;
     position: absolute;
     left: -30vw;
-    width: 10px;
-    height: 100px;
+    top: 5vh;
+    width: 120px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
 }
 
 .app .phonetic {
@@ -179,18 +196,19 @@ header .short_cut {
     display: flex;
     align-content: center;
     justify-content: center;
+
     gap: 20px;
 }
 
 .inputs_container input {
+    width: 50px;
     box-sizing: border-box;
     border: 0px;
     border-bottom: 1px black solid;
-    outline: none;
     padding: 10px;
     background-color: white;
-    width: 50px;
 
+    outline: none;
     font-size: larger;
     letter-spacing: 10px;
     text-align: center;
