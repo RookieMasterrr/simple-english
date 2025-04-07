@@ -1,11 +1,16 @@
 <template>
     <div class="app">
-        <header>{{ current_word.translation }}</header>
+        <header>
+            <div class="short_cut"></div>
+            <div class="translation">
+                {{ current_word.translation }}
+            </div>
+        </header>
+        <div class="phonetic">{{ current_word.phonetic }}</div>
         <div ref="inputs_container_ref" class="inputs_container">
             <input v-for="(_, index) in current_word.content" v-bind:key="current_word.id.toString() + index.toString()"
                 type="text" @input="(e) => handleTyping(e, index)">
         </div>
-        <!-- <button @click="playAudio">播放</button> -->
         <dialog ref="ready_dialog_ref">
             <span @click="close_dialog">
                 Are you ready? Press the Enter or Click here to begin.
@@ -60,6 +65,7 @@ const move_next_word = () => {
         count.value = 0
         nextTick(() => {
             focus_input(0)
+            playAudio()
         })
         return
     }
@@ -100,6 +106,16 @@ const close_dialog = () => {
 
 const bindKeys = () => {
     window.addEventListener('keydown', (event) => {
+        // combined key
+        if ((event.metaKey || event.ctrlKey) && event.key === 'z') {
+            event.preventDefault();
+            playAudio()
+            return
+        } else if ((event.metaKey || event.ctrlKey) && event.key === 'x') {
+            event.preventDefault();
+            playAudio()
+        }
+        // single key
         switch (event.key) {
             case "Enter":
                 if (ready_dialog_ref.value?.hasAttribute("open")) {
@@ -121,6 +137,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* app */
 .app {
     display: flex;
     flex-direction: column;
@@ -132,10 +149,29 @@ onMounted(() => {
     margin-top: 20%;
 }
 
-.app header {
+/* header */
+
+header {
+    position: relative;
+}
+
+header .translation {
     font-size: large;
 }
 
+header .short_cut {
+    background-color: lightblue;
+    position: absolute;
+    left: -30vw;
+    width: 10px;
+    height: 100px;
+}
+
+.app .phonetic {
+    font-size: small;
+}
+
+/* inputs container */
 .app .inputs_container {
     width: 100%;
     height: 50px;
@@ -146,7 +182,7 @@ onMounted(() => {
     gap: 20px;
 }
 
-.app .inputs_container input {
+.inputs_container input {
     box-sizing: border-box;
     border: 0px;
     border-bottom: 1px black solid;
@@ -161,15 +197,16 @@ onMounted(() => {
 
 }
 
-.app .inputs_container input.success {
+.inputs_container input.success {
     color: blue;
     border: 0px;
 }
 
-.app .inputs_container input.failed {
+.inputs_container input.failed {
     color: red;
 }
 
+/* dialog */
 dialog {
     padding: 0;
     margin: 0;
