@@ -8,7 +8,7 @@
         <!-- <button @click="playAudio">播放</button> -->
         <dialog ref="ready_dialog_ref">
             <span @click="close_dialog">
-                Are you ready? Press the Enter to begin.
+                Are you ready? Press the Enter or Click here to begin.
             </span>
         </dialog>
     </div>
@@ -19,13 +19,12 @@ import { words } from "@/data.ts";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
 
 const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
-
 const count = ref(0)
 const inputs_container_ref: Ref<HTMLDivElement | null> = ref(null)
+const ready_dialog_ref: Ref<HTMLDialogElement | null> = ref(null)
 const current_word = computed(() => {
     return words[count.value]
 })
-const ready_dialog_ref: Ref<HTMLDialogElement | null> = ref(null)
 
 const playAudio = () => {
     const voiceUrl = current_word.value.voiceUrl ? current_word.value.voiceUrl : `${voice_basic_url}${current_word.value.content}`
@@ -44,7 +43,6 @@ const handleTyping = (event: Event, index: number) => {
             }, 300);
         } else {
             current_input_element.setAttribute("class", "success")
-            current_input_element.setAttribute("disabled", "true")
             focus_input(index + 1)
         }
     } else {
@@ -74,24 +72,42 @@ const move_next_word = () => {
 
 const focus_input = (index: number) => {
     const index_input = inputs_container_ref.value?.children[index] as HTMLInputElement
+    index_input.removeAttribute("disabled")
     index_input.focus()
+    disable_inputs_except(index)
+}
+
+const disable_inputs_except = (index: number) => {
+    for (let i = 0; i < current_word.value.content.length; i++) {
+        if (i !== index) {
+            inputs_container_ref.value?.children[i].setAttribute("disabled", "disable")
+        }
+    }
+}
+
+const able_input = (index: number) => {
+    inputs_container_ref.value?.children[index].setAttribute("disabled", "false")
 }
 
 
 const close_dialog = () => {
     ready_dialog_ref.value?.close()
+    setTimeout(() => {
+        focus_input(0)
+        playAudio()
+    }, 500);
 }
 
 const bindKeys = () => {
     window.addEventListener('keydown', (event) => {
         switch (event.key) {
             case "Enter":
-                close_dialog()
-                setTimeout(() => {
-                    focus_input(0)
-                    playAudio()
-                }, 300);
+                if (ready_dialog_ref.value?.hasAttribute("open")) {
+                    close_dialog()
+                }
                 break;
+            case "Tab":
+                event.preventDefault()
             default:
                 break;
         }
@@ -99,7 +115,6 @@ const bindKeys = () => {
 }
 
 onMounted(() => {
-    focus_input(0)
     ready_dialog_ref.value?.show()
     bindKeys()
 })
@@ -168,5 +183,9 @@ dialog {
     height: 100%;
     text-align: center;
     line-height: 100vh;
+}
+
+dialog span:hover {
+    cursor: pointer;
 }
 </style>
