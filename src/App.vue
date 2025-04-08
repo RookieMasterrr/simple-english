@@ -15,8 +15,9 @@
         </header>
         <div class="phonetic">{{ current_word.phonetic }}</div>
         <div ref="inputs_container_ref" class="inputs_container">
-            <input v-for="(_, index) in current_word.content" v-bind:key="current_word.id.toString() + index.toString()"
-                type="text" @input="(e) => handleTyping(e, index)">
+            <input v-for="(_, index) in current_word.content"
+                v-bind:key="current_word.content.toString() + index.toString()" type="text"
+                @input="(e) => handleTyping(e, index)">
         </div>
         <dialog ref="ready_dialog_ref">
             <span @click="close_dialog">
@@ -27,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { words } from "@/data.ts";
+import { words, } from "@/data";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
 
 const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
@@ -63,7 +64,6 @@ const handleTyping = (event: Event, index: number) => {
             current_input_element.value = ""
         }, 300);
     }
-
 }
 
 const move_next_word = () => {
@@ -98,9 +98,6 @@ const disable_inputs_except = (index: number) => {
     }
 }
 
-const able_input = (index: number) => {
-    inputs_container_ref.value?.children[index].setAttribute("disabled", "false")
-}
 
 const show_answer = () => {
     for (let i = 0; i < current_word.value.content.length; i++) {
@@ -169,7 +166,7 @@ header {
 }
 
 header .translation {
-    font-size: large;
+    font-size: larger;
 }
 
 header .short_cut {
@@ -201,7 +198,7 @@ header .short_cut {
 }
 
 .inputs_container input {
-    width: 50px;
+    width: 55px;
     box-sizing: border-box;
     border: 0px;
     border-bottom: 1px black solid;
@@ -209,19 +206,24 @@ header .short_cut {
     background-color: white;
 
     outline: none;
-    font-size: larger;
+    font-size: 40px;
     letter-spacing: 10px;
     text-align: center;
-
+    font-style: italic;
 }
 
+.inputs_container input::placeholder {
+    color: gainsboro;
+}
+
+
 .inputs_container input.success {
-    color: blue;
+    color: lightblue;
     border: 0px;
 }
 
 .inputs_container input.failed {
-    color: red;
+    color: lightcoral;
 }
 
 /* dialog */
