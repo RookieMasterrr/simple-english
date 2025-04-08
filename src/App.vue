@@ -26,7 +26,7 @@
                 @input="(e) => handleTyping(e, index)">
         </div>
         <div class="status">
-            <div class="time">时间:</div>
+            <div class="time">时间:{{ time }}</div>
             <div class="current_word_number">当前: {{ count }}</div>
             <div class="total_number">总数: {{ words.length }}</div>
         </div>
@@ -42,6 +42,7 @@
 import { words } from "@/data.ts";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
 
+const time = ref(0)
 const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
 const count = ref(0)
 const inputs_container_ref: Ref<HTMLDivElement | null> = ref(null)
@@ -172,6 +173,9 @@ onMounted(() => {
     if (localStorage.getItem('count')) {
         count.value = Number(localStorage.getItem('count'))
     }
+    setInterval(() => {
+        time.value += 1
+    }, 1000);
     ready_dialog_ref.value?.show()
     bindKeys()
 })
