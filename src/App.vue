@@ -6,10 +6,13 @@
                     ⌘/Ctrl + Z = 🔊
                 </section>
                 <section>
-                    ⌘/Ctrl + X = 👀
+                    ⌘/Ctrl + X = ⬅️
                 </section>
                 <section>
-                    ⌘/Ctrl + M = ↩️
+                    ⌘/Ctrl + C = ⏮️
+                </section>
+                <section>
+                    Tab = 👀
                 </section>
             </div>
             <div class="translation">
@@ -93,6 +96,7 @@ const move_next_word = () => {
 }
 
 const move_to_word = (number: number) => {
+    if (number < 0 || number >= words.length) return
     count.value = number
     localStorage.setItem('count', number.toString())
     nextTick(() => {
@@ -140,9 +144,9 @@ const bindKeys = () => {
             return
         } else if ((event.metaKey || event.ctrlKey) && event.key === 'x') {
             event.preventDefault();
-            show_answer()
+            move_to_word(count.value - 1)
             return
-        } else if ((event.metaKey || event.ctrlKey) && event.key === 'm') {
+        } else if ((event.metaKey || event.ctrlKey) && event.key === 'c') {
             event.preventDefault();
             move_to_word(0)
             return
@@ -157,6 +161,7 @@ const bindKeys = () => {
                 break;
             case "Tab":
                 event.preventDefault()
+                show_answer()
             default:
                 break;
         }
@@ -196,7 +201,7 @@ header .translation {
 
 header .short_cut {
     position: absolute;
-    left: -30vw;
+    left: -37vw;
     /* top: 5vh; */
     width: 150px;
 
