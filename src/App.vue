@@ -8,6 +8,9 @@
                 <section>
                     ⌘/Ctrl + X = 👀
                 </section>
+                <section>
+                    ⌘/Ctrl + M = ↩️
+                </section>
             </div>
             <div class="translation">
                 {{ current_word.translation }}
@@ -89,6 +92,15 @@ const move_next_word = () => {
     })
 }
 
+const move_to_word = (number: number) => {
+    count.value = number
+    localStorage.setItem('count', number.toString())
+    nextTick(() => {
+        focus_input(0)
+        playAudio()
+    })
+}
+
 const focus_input = (index: number) => {
     const index_input = inputs_container_ref.value?.children[index] as HTMLInputElement
     index_input.removeAttribute("disabled")
@@ -129,6 +141,10 @@ const bindKeys = () => {
         } else if ((event.metaKey || event.ctrlKey) && event.key === 'x') {
             event.preventDefault();
             show_answer()
+            return
+        } else if ((event.metaKey || event.ctrlKey) && event.key === 'm') {
+            event.preventDefault();
+            move_to_word(0)
             return
         }
 
@@ -182,7 +198,7 @@ header .short_cut {
     position: absolute;
     left: -30vw;
     /* top: 5vh; */
-    width: 120px;
+    width: 150px;
 
     display: flex;
     flex-direction: column;
