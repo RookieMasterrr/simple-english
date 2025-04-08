@@ -19,6 +19,11 @@
                 v-bind:key="current_word.content.toString() + index.toString()" type="text"
                 @input="(e) => handleTyping(e, index)">
         </div>
+        <div class="status">
+            <div class="time">时间:</div>
+            <div class="current_word_number">当前: {{ count }}</div>
+            <div class="total_number">总数: {{ words.length }}</div>
+        </div>
         <dialog ref="ready_dialog_ref">
             <span @click="close_dialog">
                 Are you ready? Press the Enter or Click here to begin.
@@ -28,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { words, } from "@/data";
+import { words } from "@/data.ts";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
 
 const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
@@ -67,6 +72,7 @@ const handleTyping = (event: Event, index: number) => {
 }
 
 const move_next_word = () => {
+    localStorage.setItem('count', (count.value + 1).toString())
     if (count.value === words.length - 1) {
         alert("背完啦")
         count.value = 0
@@ -142,6 +148,9 @@ const bindKeys = () => {
 }
 
 onMounted(() => {
+    if (localStorage.getItem('count')) {
+        count.value = Number(localStorage.getItem('count'))
+    }
     ready_dialog_ref.value?.show()
     bindKeys()
 })
@@ -172,7 +181,7 @@ header .translation {
 header .short_cut {
     position: absolute;
     left: -30vw;
-    top: 5vh;
+    /* top: 5vh; */
     width: 120px;
 
     display: flex;
@@ -181,6 +190,7 @@ header .short_cut {
 
 }
 
+/* phonetic */
 .app .phonetic {
     font-size: small;
 }
@@ -245,4 +255,16 @@ dialog {
 dialog span:hover {
     cursor: pointer;
 }
+
+/* status */
+.app .status {
+    display: flex;
+    gap: 20px;
+}
+
+.status .time {}
+
+.status .current_word_number {}
+
+.status .total_number {}
 </style>
