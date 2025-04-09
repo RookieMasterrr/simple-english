@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { words } from "@/data.ts";
 import { computed, nextTick, onMounted, ref, type Ref } from "vue";
+import typing_sound_url from "@/assets/short_type.mp3"
 
 const time = ref(0)
 const voice_basic_url = 'https://dict.youdao.com/dictvoice?type=0&audio='
@@ -56,7 +57,12 @@ const playAudio = () => {
     new Audio(voiceUrl).play()
 }
 
+const playTypingAudio = () => {
+    new Audio(typing_sound_url).play()
+}
+
 const handleTyping = (event: Event, index: number) => {
+    playTypingAudio()
     const current_input_element = (event.target as HTMLInputElement)
     const current_input_value = current_input_element.value
     const wanted_value = current_word.value.content[index]
