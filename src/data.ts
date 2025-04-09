@@ -6,27 +6,6 @@ export interface new_word {
   voiceUrl?: string
 }
 
-// const basic_url = 'https://fanyi-api.baidu.com/api/trans/vip/translate'
-
-// const get_translation = async (word: string) => {
-//   const q = word
-//   const from = 'en'
-//   const to = 'zh'
-//   const appid = '20250408002326902'
-//   const secret = 'AF2cXIiGNWihTAETUQWQ'
-//   const salt = '1435660288'
-//   const str1 = `${appid}${q}${salt}${secret}`
-//   const sign = await calculateMD5(str1)
-//   const url = `${basic_url}?q=${q}&from=${from}&to=${to}&appid=${appid}&salt=${salt}&sign=${sign}`
-//   const respnse = await fetch(url)
-//   const data = await respnse.json()
-//   return data
-// }
-
-// async function calculateMD5(message: string): Promise<string> {
-//   return crypto.createHash('md5').update(text).digest('hex')
-// }
-
 export const words: new_word[] = [
   {
     content: 'protection',

@@ -26,7 +26,7 @@
                 @input="(e) => handleTyping(e, index)">
         </div>
         <div class="status">
-            <div class="time">时间:{{ time }}</div>
+            <div class="time">时间:{{ convert_seconds_to_HMS(time) }}</div>
             <div class="current_word_number">当前: {{ count }}</div>
             <div class="total_number">总数: {{ words.length }}</div>
         </div>
@@ -136,6 +136,28 @@ const close_dialog = () => {
     }, 500);
 }
 
+const convert_seconds_to_HMS = (seconds: number): string => {
+    let H: number = 0
+    let M: number = 0
+    let S: number = seconds
+    if (seconds >= 60) {
+        M = Math.floor(seconds / 60)
+        S = seconds % 60
+    }
+    if (M >= 60) {
+        H = Math.floor(M / 60)
+        M = M % 60
+    }
+
+    if (H === 0 && M === 0) {
+        return `${S}s`
+    }
+    if (H === 0 && M !== 0) {
+        return `${M}m:${S}s`
+    }
+    return `${H}h:${M}m:${S}s`
+}
+
 const bindKeys = () => {
     window.addEventListener('keydown', (event) => {
         // combined key
@@ -213,6 +235,8 @@ header .short_cut {
     flex-direction: column;
     gap: 10px;
 
+    color: gray;
+
 }
 
 /* phonetic */
@@ -285,6 +309,8 @@ dialog span:hover {
 .app .status {
     display: flex;
     gap: 20px;
+    color: gray;
+    margin-top: 100px;
 }
 
 .status .time {}
