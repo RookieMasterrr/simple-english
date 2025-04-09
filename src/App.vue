@@ -32,7 +32,7 @@
         </div>
         <dialog ref="ready_dialog_ref">
             <span @click="close_dialog">
-                Are you ready? Press the Enter or Click here to begin.
+                Press the Enter or Click here to begin.
             </span>
         </dialog>
     </div>
