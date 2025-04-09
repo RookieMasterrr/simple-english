@@ -137,10 +137,10 @@ const show_answer = () => {
 
 const close_dialog = () => {
     ready_dialog_ref.value?.close()
-    setTimeout(() => {
+    nextTick(() => {
         focus_input(0)
         playAudio()
-    }, 500);
+    })
 }
 
 const convert_seconds_to_HMS = (seconds: number): string => {
