@@ -7,9 +7,9 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // https://vite.dev/config/
 export default defineConfig({
   base: '/simple-english/',
-  build: {
-    outDir: 'dist/simple-english',
-  },
+  // build: {
+  //   outDir: 'dist/simple-english',
+  // },
   plugins: [vue(), vueDevTools()],
   resolve: {
     alias: {
