@@ -312,8 +312,8 @@ dialog {
     width: 100%;
     height: 100%;
     text-align: center;
-    line-height: 100vh;
-
+    /* line-height: 100vh; */
+    padding-top: 40vh;
     font-family: "Kalam", cursive;
     font-size: 50px;
     font-weight: 400;
