@@ -64,7 +64,8 @@ const playTypingAudio = () => {
 const handleTyping = (event: Event, index: number) => {
     playTypingAudio()
     const current_input_element = (event.target as HTMLInputElement)
-    const current_input_value = current_input_element.value
+    let current_input_value = current_input_element.value
+    current_input_value = current_input_value.toLocaleLowerCase()
     const wanted_value = current_word.value.content[index]
     if (current_input_value === wanted_value) {
         if (index === current_word.value.content.length - 1) {
