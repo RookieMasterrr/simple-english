@@ -313,6 +313,11 @@ dialog {
     height: 100%;
     text-align: center;
     line-height: 100vh;
+
+    font-family: "Kalam", cursive;
+    font-size: 50px;
+    font-weight: 400;
+    font-style: normal;
 }
 
 dialog span:hover {
