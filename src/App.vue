@@ -261,6 +261,8 @@ header .short_cut {
     align-content: center;
     justify-content: center;
 
+    flex-wrap: wrap;
+
     gap: 20px;
 }
 
