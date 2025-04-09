@@ -223,6 +223,9 @@ header {
 
 header .translation {
     font-size: larger;
+    font-family: "Kalam", cursive;
+    font-weight: 400;
+    font-style: normal;
 }
 
 header .short_cut {
@@ -247,7 +250,6 @@ header .short_cut {
 /* inputs container */
 .app .inputs_container {
     width: 100%;
-    height: 50px;
 
     display: flex;
     align-content: center;
@@ -257,7 +259,7 @@ header .short_cut {
 }
 
 .inputs_container input {
-    width: 55px;
+    width: 70px;
     box-sizing: border-box;
     border: 0px;
     border-bottom: 1px black solid;
@@ -265,10 +267,13 @@ header .short_cut {
     background-color: white;
 
     outline: none;
-    font-size: 40px;
+    font-size: 50px;
     letter-spacing: 10px;
     text-align: center;
-    font-style: italic;
+
+    font-family: "Kalam", cursive;
+    font-weight: 600;
+    font-style: normal;
 }
 
 .inputs_container input::placeholder {
