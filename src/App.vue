@@ -85,7 +85,7 @@ const handleTyping = (event: Event, index: number) => {
         setTimeout(() => {
             inputs_container_ref.value?.classList.remove("animate__headShake", "animate__animated")
             current_input_element.value = ""
-        }, 300);
+        }, 100);
     }
 }
 
