@@ -52,6 +52,8 @@ const current_word = computed(() => {
     return words[count.value]
 })
 
+const current_index = ref(0)
+
 const playAudio = () => {
     const voiceUrl = current_word.value.voiceUrl ? current_word.value.voiceUrl : `${voice_basic_url}${current_word.value.content}`
     new Audio(voiceUrl).play()
@@ -117,6 +119,7 @@ const focus_input = (index: number) => {
     const index_input = inputs_container_ref.value?.children[index] as HTMLInputElement
     index_input.removeAttribute("disabled")
     index_input.focus()
+    current_index.value = index
     disable_inputs_except(index)
 }
 
@@ -204,6 +207,7 @@ onMounted(() => {
     }
     setInterval(() => {
         time.value += 1
+        focus_input(current_index.value)
     }, 1000);
     ready_dialog_ref.value?.show()
     bindKeys()
