@@ -20,7 +20,7 @@
             </div>
         </header>
         <div class="phonetic">{{ current_word.phonetic }}</div>
-        <div ref="inputs_container_ref" class="inputs_container">
+        <div ref="inputs_container_ref" class="inputs_container ">
             <input v-for="(_, index) in current_word.content"
                 v-bind:key="current_word.content.toString() + index.toString()" type="text"
                 @input="(e) => handleTyping(e, index)">
@@ -81,7 +81,9 @@ const handleTyping = (event: Event, index: number) => {
         }
     } else {
         current_input_element.setAttribute("class", "failed")
+        inputs_container_ref.value?.classList.add("animate__headShake", "animate__animated")
         setTimeout(() => {
+            inputs_container_ref.value?.classList.remove("animate__headShake", "animate__animated")
             current_input_element.value = ""
         }, 300);
     }
