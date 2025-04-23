@@ -2577,7 +2577,7 @@ export const words: new_word[] = [
   },
   {
     content: 'back',
-    translation: '< 返回',
+    translation: '返回',
   },
   {
     content: 'inspection',
