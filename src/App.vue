@@ -68,7 +68,9 @@ const handleTyping = (event: Event, index: number) => {
     const current_input_element = (event.target as HTMLInputElement)
     let current_input_value = current_input_element.value
     current_input_value = current_input_value.toLocaleLowerCase()
-    const wanted_value = current_word.value.content[index]
+    let wanted_value = current_word.value.content[index]
+    wanted_value = wanted_value.toLocaleLowerCase()
+
     if (current_input_value === wanted_value) {
         if (index === current_word.value.content.length - 1) {
             current_input_element.setAttribute("class", "success")
