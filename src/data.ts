@@ -13716,7 +13716,7 @@ export const words: new_word[] = [
     translation: '表明',
   },
   {
-    content: 'scontent',
+    content: 'discontent',
     translation: '不满',
   },
   {
