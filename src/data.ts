@@ -2293,7 +2293,7 @@ export const words: new_word[] = [
   },
   {
     content: 'ounce',
-    translation: '盎司(重量单位',
+    translation: '盎司(重量单位)',
   },
   {
     content: 'call',
@@ -3637,7 +3637,7 @@ export const words: new_word[] = [
   },
   {
     content: 'ounce',
-    translation: '盎司(重量单位',
+    translation: '盎司(重量单位)',
   },
   {
     content: 'prominent',
@@ -20281,7 +20281,7 @@ export const words: new_word[] = [
   },
   {
     content: 'cent',
-    translation: '分(辅币单位',
+    translation: '分(辅币单位)',
   },
   {
     content: 'immeasurable',
@@ -21965,7 +21965,7 @@ export const words: new_word[] = [
   },
   {
     content: 'inch',
-    translation: '英寸(长度单位',
+    translation: '英寸(长度单位)',
   },
   {
     content: 'overload',
