@@ -19885,7 +19885,7 @@ export const words: new_word[] = [
   },
   {
     content: 'span',
-    translation: '跨度；跨越；持续时间；（桥或拱的）墩距；跨距； 包括（广大地区）',
+    translation: '跨越',
   },
   {
     content: 'lorry',
@@ -22513,7 +22513,7 @@ export const words: new_word[] = [
   },
   {
     content: 'span',
-    translation: '跨度；跨越；持续时间；（桥或拱的）墩距；跨距； 包括（广大地区）',
+    translation: '跨度',
   },
   {
     content: 'democracy',
