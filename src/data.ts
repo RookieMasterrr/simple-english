@@ -23672,7 +23672,7 @@ export const words: new_word[] = [
     translation: '每年的',
   },
   {
-    content: 'gaol',
+    content: 'jail',
     translation: '监狱',
   },
   {
