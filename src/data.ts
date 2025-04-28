@@ -22960,7 +22960,7 @@ export const words: new_word[] = [
     translation: '危险的',
   },
   {
-    content: 'scontent',
+    content: 'discontent',
     translation: '不满',
   },
   {
