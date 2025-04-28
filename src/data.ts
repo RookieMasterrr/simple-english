@@ -22912,7 +22912,7 @@ export const words: new_word[] = [
     translation: '春天',
   },
   {
-    content: 'one',
+    content: 'a',
     translation: '一',
   },
   {
