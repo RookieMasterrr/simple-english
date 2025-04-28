@@ -22912,8 +22912,8 @@ export const words: new_word[] = [
     translation: '春天',
   },
   {
-    content: 'I',
-    translation: '一、',
+    content: 'one',
+    translation: '一',
   },
   {
     content: 'bunch',
