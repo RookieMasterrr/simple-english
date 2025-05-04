@@ -211,7 +211,12 @@ const bindKeys = () => {
 
 onMounted(() => {
     if (localStorage.getItem('count')) {
-        count.value = Number(localStorage.getItem('count'))
+        if (Number(localStorage.getItem('count')) >= words.length) {
+            count.value = 0
+            localStorage.setItem('count', 0)
+        } else {
+            count.value = Number(localStorage.getItem('count'))
+        }
     }
     setInterval(() => {
         time.value += 1
