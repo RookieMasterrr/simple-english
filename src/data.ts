@@ -8,12 +8,12 @@ export interface new_word {
 
 export const words: new_word[] = [
   {
-    content: 'protection',
-    translation: '保护',
+    content: 'hello',
+    translation: '你好',
   },
   {
-    content: 'league',
-    translation: '联合会',
+    content: 'world',
+    translation: '世界',
   },
   {
     content: 'session',
