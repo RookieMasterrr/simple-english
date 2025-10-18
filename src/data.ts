@@ -8,6 +8,10 @@ export interface new_word {
 
 export const words: new_word[] = [
   {
+    content: 'please',
+    translation: 'please...',
+  },
+  {
     content: 'hello',
     translation: '你好',
   },
